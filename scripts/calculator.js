@@ -97,6 +97,7 @@ export default class Calculator {
       Calculator.render();
     }
   }
+  
   static addDot(value) {
     if (Calculator.leftOperand && !Calculator.operator && !Calculator.leftOperand.includes('.')) {
       Calculator.leftOperand += value;
