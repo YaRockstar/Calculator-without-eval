@@ -97,15 +97,17 @@ export default class Calculator {
       Calculator.render();
     }
   }
-
   static addDot(value) {
     if (Calculator.leftOperand && !Calculator.operator && !Calculator.leftOperand.includes('.')) {
       Calculator.leftOperand += value;
       Calculator.result = Calculator.leftOperand;
+    } else if (Calculator.result === '0' && !Calculator.operator && !Calculator.leftOperand.includes('.')) {
+      Calculator.leftOperand = '0' + value;
+      Calculator.result = Calculator.leftOperand;
     } else if (Calculator.rigthOperand && !Calculator.rigthOperand.includes('.')) {
       Calculator.rigthOperand += value;
       Calculator.result = Calculator.rigthOperand;
-    }
+    } 
     Calculator.render();
   }
 
