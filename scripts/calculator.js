@@ -21,7 +21,7 @@ export default class Calculator {
         break;
       case '/':
         Calculator.divide(+Calculator.leftOperand, +Calculator.rigthOperand);
-        break;  
+        break;
       default:
         break;
     }
@@ -44,7 +44,7 @@ export default class Calculator {
       }
       Calculator.result = -number;
       Calculator.render();
-    } 
+    }
   }
 
   static calcPercent() {
@@ -57,7 +57,7 @@ export default class Calculator {
       }
       Calculator.result = number / 100;
       Calculator.render();
-    } 
+    }
   }
 
   static addSymbol(event) {
@@ -65,15 +65,15 @@ export default class Calculator {
     const isOperator = event.target.classList.contains('operator');
     const isDot = event.target.classList.contains('dot');
     const value = event.target.innerText;
-  
+
     if (isNumber) {
       Calculator.addNumber(value);
-    } 
-  
+    }
+
     if (isOperator) {
       Calculator.addOperator(value);
     }
-  
+
     if (isDot) {
       Calculator.addDot(value);
     }
@@ -97,7 +97,7 @@ export default class Calculator {
       Calculator.render();
     }
   }
-  
+
   static addDot(value) {
     if (Calculator.leftOperand && !Calculator.operator && !Calculator.leftOperand.includes('.')) {
       Calculator.leftOperand += value;
@@ -113,7 +113,7 @@ export default class Calculator {
   }
 
   static sum(a, b) {
-    Calculator.result = (a + b);
+    Calculator.result = +(a + b).toFixed(3);
   }
 
   static multiply(a, b) {
@@ -136,7 +136,7 @@ export default class Calculator {
   }
 
   static setNextSettings() {
-    Calculator.leftOperand = Calculator.result;
+    Calculator.leftOperand = `${Calculator.result}`;
     Calculator.operator = '';
     Calculator.rigthOperand = '';
   }
