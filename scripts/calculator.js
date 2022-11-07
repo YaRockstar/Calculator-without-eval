@@ -1,7 +1,7 @@
 export default class Calculator {
   static leftOperand = '';
   static operator = '';
-  static rigthOperand = '';
+  static rightOperand = '';
   static result = '0';
 
   static render() {
@@ -11,16 +11,16 @@ export default class Calculator {
   static calculate() {
     switch (Calculator.operator) {
       case '+':
-        Calculator.sum(+Calculator.leftOperand, +Calculator.rigthOperand);
+        Calculator.sum(+Calculator.leftOperand, +Calculator.rightOperand);
         break;
       case '-':
-        Calculator.sum(+Calculator.leftOperand, +(-Calculator.rigthOperand));
+        Calculator.sum(+Calculator.leftOperand, +-Calculator.rightOperand);
         break;
       case 'x':
-        Calculator.multiply(+Calculator.leftOperand, +Calculator.rigthOperand);
+        Calculator.multiply(+Calculator.leftOperand, +Calculator.rightOperand);
         break;
       case '/':
-        Calculator.divide(+Calculator.leftOperand, +Calculator.rigthOperand);
+        Calculator.divide(+Calculator.leftOperand, +Calculator.rightOperand);
         break;
       default:
         break;
@@ -81,8 +81,8 @@ export default class Calculator {
 
   static addNumber(value) {
     if (Calculator.leftOperand && Calculator.operator) {
-      Calculator.rigthOperand += value;
-      Calculator.result = Calculator.rigthOperand;
+      Calculator.rightOperand += value;
+      Calculator.result = Calculator.rightOperand;
     } else {
       Calculator.leftOperand += value;
       Calculator.result = Calculator.leftOperand;
@@ -102,13 +102,17 @@ export default class Calculator {
     if (Calculator.leftOperand && !Calculator.operator && !Calculator.leftOperand.includes('.')) {
       Calculator.leftOperand += value;
       Calculator.result = Calculator.leftOperand;
-    } else if (Calculator.result === '0' && !Calculator.operator && !Calculator.leftOperand.includes('.')) {
+    } else if (
+      Calculator.result === '0' &&
+      !Calculator.operator &&
+      !Calculator.leftOperand.includes('.')
+    ) {
       Calculator.leftOperand = '0' + value;
       Calculator.result = Calculator.leftOperand;
-    } else if (Calculator.rigthOperand && !Calculator.rigthOperand.includes('.')) {
-      Calculator.rigthOperand += value;
-      Calculator.result = Calculator.rigthOperand;
-    } 
+    } else if (Calculator.rightOperand && !Calculator.rightOperand.includes('.')) {
+      Calculator.rightOperand += value;
+      Calculator.result = Calculator.rightOperand;
+    }
     Calculator.render();
   }
 
@@ -132,12 +136,12 @@ export default class Calculator {
     Calculator.result = '0';
     Calculator.leftOperand = '';
     Calculator.operator = '';
-    Calculator.rigthOperand = '';
+    Calculator.rightOperand = '';
   }
 
   static setNextSettings() {
     Calculator.leftOperand = `${Calculator.result}`;
     Calculator.operator = '';
-    Calculator.rigthOperand = '';
+    Calculator.rightOperand = '';
   }
 }
